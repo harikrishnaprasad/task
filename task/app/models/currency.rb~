@@ -1,0 +1,20 @@
+class Currency < ActiveRecord::Base
+#has_many :facilities
+
+belongs_to :countries
+ def ordered_currencies
+    # Set up an array of currencies, with the default one first.
+    default_currency = self.Country.currency
+    currencies = [default_currency.name]
+
+    # Add in all other currencies except the default one.
+    Currency.where("id != ?", defauly_currency.id).each do |currency|
+      currencies << currency.name
+    end
+
+    return currencies
+  end
+
+
+
+end

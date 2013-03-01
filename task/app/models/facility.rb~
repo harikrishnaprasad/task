@@ -1,0 +1,19 @@
+class Facility < ActiveRecord::Base
+belongs_to :country
+def ordered_currencies
+    # Set up an array of currencies, with the default one first.
+    default_currency = self.country.currency
+    currencies = [default_currency.name]
+
+    # Add in all other currencies except the default one.
+    Currency.where("id != ?", defauly_currency.id).each do |currency|
+      currencies << currency.name
+    end
+
+    return currencies
+  end
+
+
+
+
+end
